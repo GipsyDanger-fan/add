@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = ['a', 'a', 'a', 'a', 'a', 'a', 'as', 's', 's', 'dd', 'd', 'd', 'f', 'f', 'dfa', 'f', 'f', 'saf', 'f'];
+        // var count;
+        //    var ree=[];
+        //    var max = 0;
+        //     for ( var i=0;i<arr.length;i++) {
+        //         count = 1;
+        //         for (var j = 0; j < arr.length; j++) {
+        //             if ( i!=j && arr[i]==arr[j] ) {
+        //                 count++
+        //             }
+
+        //         }
+        //         if( max < count ) {
+        //             max = count;
+        //         }
+        //         ree.push(count)
+        //     }
+        //     console.log(ree)
+        //     console.log(max)
+        var obj = {};
+        for (var i=0;i<arr.length;i++) {
+            var s = arr[i]
+            if (obj[s]) {
+                obj[s]++
+            } else {
+                obj[s]=1
+            }
+        }
+        console.log(obj)
+    </script>
+</body>
+
+</html>

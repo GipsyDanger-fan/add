@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="btn_box">
+        <input type="checkbox" class="checkAll">
+        <button></button>
+    </div>
+    <input type="checkbox" class="checkOne">
+    <input type="checkbox" class="checkOne">
+    <input type="checkbox" class="checkOne">
+    <script src="./jquery.min.js"></script>
+    <script>
+        $('.checkAll').change(function () {
+            $('.checkOne').prop('checked', $('.checkAll').prop('checked'))
+            console.log($('.checkAll').prop('checked'))
+        })
+        $('button').click(function () {
+            $('input').prop('checked', !$('input').prop('checked'))
+        })
+        $('.checkOne').change(function(){
+            console.log($('.checkOne').length)
+            console.log($('.checkOne:checked').length)
+            $('.checkAll').prop('checked',$('.checkOne:checked').length == $('.checkOne').length);
+        })
+    </script>
+</body>
+
+</html>
+<!-- 、用 jQuery 实现全选/反选功能，效果如图
+
+要求1：点击全选的checkbox，让下面所有人名前的checkbox的选中状态和全选的一致
+
+要求2：点击反选按钮，所有人名前的checkbox的选中状态取反
+
+要求3：点击所有人名前的checkbox，判断全选的选中状态
+
+要求4：代码规范 -->

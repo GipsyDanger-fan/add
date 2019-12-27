@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <span style="color:red">
+            抱歉，你访问的网页不存在或者已经被删除。
+        </span>
+        <br>
+        <span>
+            该界面将在<span id="remain">5</span> s后自动跳转到首页,或者您点击
+            <a href="http://www.itheima.com">立即跳转</a>
+        </span>
+    </div>
+    <script>
+        //该布局效果如图：
+        // 需求：
+        // 1、5s之后自动跳转到http://www.itheima.com
+        // 2、页面中的时间要动态变化 location
+        var a = document.querySelector('a');
+        // console.log(a)
+        var sp = document.querySelector('#remain');
+        // console.log(sp)
+        var num = 5;
+        var timer = setInterval(function(){
+            num--
+            sp.innerHTML=num;
+            if (num == 0) {
+                clearInterval(timer);
+               location.href  = 'http://www.itheima.com';
+            }
+        },1000);
+    </script>
+</body>
+
+</html>

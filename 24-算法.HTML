@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../框架/自建方法/String_suanfa.js"></script>
+    <script>
+        //1-1 普通排序
+        // 使arr的第n项与后面的每一项比较
+        // function fn (arr) {
+        //     var temp;
+        //     for (var i=0;i<arr.length;i++) {
+        //         for (var j=i+1;j<arr.length;j++) {
+        //             if (arr[i]>arr[j]) {
+        //                 temp = arr[i];
+        //                 arr[i] = arr[j];
+        //                 arr[j] = temp;
+        //             }
+        //         }
+        //     }
+        //     return arr;
+        // }
+        // var arr = [2,8,4,3,8,9,7,3];
+        // console.log(fn(arr)); 
+
+        //1-2 拓展 : 给数组的原型对象添加排序方法
+        // Array.prototype.paixu = function () {
+        //     var temp;
+        //     for (var i = 0; i < this.length; i++) {
+        //         for (var j = i + 1; j < this.length; j++) {
+        //             if (this[i] > this[j]) {
+        //                 temp = this[i];
+        //                 this[i] = this[j];
+        //                 this[j] = temp;
+        //             }
+        //         }
+        //     }
+        //     return this;
+        // }
+        // var arr = [2,8,4,3,8,9,7,3];
+        // console.log(arr.paixu())
+        // var ree = [2,8,4,3,8,9,7,3]
+        // console.log(ree.paixu())
+        // 2-1 用while循环完成冒泡排序 
+        // 将for转化为while即可
+        // var fn = function (arr) {
+        //     var i = arr.length;
+        //     var temp;
+        //     var flag
+        //     while (i>0) {
+        //         flag = true
+        //         for (var j=0;j<i-1;j++) {
+        //             if ( arr[j] > arr[j+1] ) {
+        //                 temp = arr[j];
+        //                 arr[j] = arr[j+1];
+        //                 arr[j+1] = temp;
+        //                 flag = false;
+        //             }
+        //         }
+        //         i--
+        //         if (flag) {
+        //             break;
+        //         }
+        //     }
+        //     return arr
+        // }
+        // var arr = [2,8,4,3,8,9,7,3];
+        // console.log(fn(arr))
+
+        // 2-2 拓展将冒泡排序添加为Array方法
+        // Array.prototype.maoPao = function () {
+        //     var i = this.length;
+        //     var temp;
+        //     var flag;
+        //     while (i>0) {
+        //         flag = true
+        //         for (var j=0;j<i-1;j++) {
+        //             if (this[j]>this[j+1]) {
+        //                 temp = this[j];
+        //                 this[j] = this[j+1];
+        //                 this[j+1] = temp;
+        //                 flag = false;
+        //            }
+        //        }
+        //        i--;
+        //        if (flag) {
+        //            break;
+        //        }
+        //     }
+        //     return this
+        // }
+        // console.log(arr.maoPao())
+        // var ree = [2,8,4,3,8,9,7,3];
+        // console.log(ree.maoPao())
+
+
+        // 3-1 字符串中出现最多次数的 字符及次数
+        // 字符串拆分遍历查找
+        // var str = 'abcdefgaaass';
+        // var arr = str.split('');
+        // function fn (str) {
+        //     var max = 0,maxStr='';
+        //     var count;
+        //     for (var i=0;i<str.length;i++) {
+        //         count = 0;
+        //         for (var j = 0; j < str.length; j++) {
+        //             if (str[j] == str[i]) {
+        //                 count++
+        //             }
+        //         }
+        //         if ( max < count ) {
+        //             max = count;
+        //             maxStr = str[i];
+        //         }
+        //     }
+        //     var x = '字符'+maxStr+'次数'+max
+        //     return x
+        // }
+        // var str = 'abcdefgaaass';
+        // console.log(fn(str))
+        // String.prototype.maxVal = function () {
+        //     var max = 0,maxStr='',count,x;
+        //     for (var i=0;i<this.length;i++) {
+        //         count = 0;
+        //         for (var j=0;j<this.length;j++) {
+        //             if (this[j]==this[i]) {
+        //                 count++;
+        //             }
+        //         }
+        //         if (max<count) {
+        //             max = count;
+        //             maxStr = this[i];
+        //         }
+        //     }
+        //     x = '字符:'+maxStr+'\t'+'次数:'+max
+        //     return x
+        // }
+        // var str = 'abcdefgaaass';
+        // console.log(str.maxVal())
+        // 3-2 字符串长度判断最多字符方法
+        //1
+        // var str='aaasssssbbbcccccccccccccccccccccc'
+        // var max = 0,maxStr='',x,y;
+        // for (var i=0;i<str.length;i++) {
+        //     x = str.substr(i,1);
+        //     y = str.split(x);
+        //     if (max < y.length-1) {
+        //         max = y.length-1;
+        //         maxStr = x;
+        //     }
+        // }
+        // console.log('字符:'+maxStr+'\t'+'次数:'+max)
+
+        // function fn(str) {
+        //     var max = 0, maxStr = '', x, y;
+        //     for (var i = 0; i < str.length; i++) {
+        //         x = str.substr(i, 1);
+        //         y = str.split(x);
+        //         if (max < y.length - 1) {
+        //             max = y.length - 1
+        //             maxStr = x
+        //         }
+        //     }
+        //     var f = '字符:' + maxStr + '\t' + '次数:' + max
+        //     return f
+        // }
+        // var str = 'aaasssssbbbcccccccccccccccccccccc'
+        // console.log(fn(str));
+
+        // String.prototype.MaxVal = function () {
+        //     var max=0,maxStr='',y;
+        //     for (var i = 0; i < this.length; i++) {
+        //         y = this.split(this.substr(i,1));
+        //         if (max < y.length-1) {
+        //             max = y.length-1
+        //             maxStr = this.substr(i,1);
+        //         }
+        //     }
+        //     return '字符:' + maxStr + '\t' + '次数:' + max
+        // }
+        // var str = 'aaasssssbbbcccccccccccccccccccccc'
+        // console.log(str.maxVal());
+        // 4-1 编程实现splice方法   及函数封装splice方法原理
+        // Array.prototype.fn = function (index,val) {
+        //     for (var i=this.length-1;i>=index;i--) {
+        //         this[i+1]=this[i];
+        //     }
+        //     this[index] = val
+        //     return this
+        // }
+        // var arr=[1,2,3,4]
+        // console.log(arr.fn(2,2))
+        
+        // function fn (arr,index,val) {
+        //     for (var i=arr.length-1;i>=index;i--) {
+        //         arr[i+1]=arr[i];
+        //     }
+        //     arr[index] = val;
+        //     return arr
+        // }
+        // console.log(fn(arr,2,2))
+
+        // 5-1 编程实现indexOf 方法
+        // function fn (arr,val) {
+        //     for (var i=0;i<arr.length;i++) {
+        //         if (arr[i] == val) {
+        //             return i;
+        //         }
+        //     }
+        //     return -1;
+        // } 
+        // var arr=[1,2,3,4];
+        // console.log(fn(arr,2))
+        // Array.prototype.IndexOf = function (val) {
+        //     for (var i=0;i<this.length;i++) {
+        //         if (this[i]===val) {
+        //             return i;
+        //         }
+        //     }
+        //     return -1;
+        // }
+        // var arr=[1,2,3,4];
+        // console.log(arr.IndexOf(2));
+
+        
+        
+    </script>
+</body>
+
+</html>

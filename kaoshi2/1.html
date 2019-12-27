@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//先找出字符串 '8587263747153203552943982' 中出现次数最多的数字及次数，然后去重后并排序（不准使用sort），使得到结果为 '0123456789'。
+// 要求1：找到出现最多的数字和出现的次数
+// 要求2：去除字符串中重复的数字
+// 要求3：对去重后的字符串排序
+// 要求4：代码规范
+        var str='8587263747153203552943982';
+        var arr = str.split('');
+        var ree=[],arrChong=[]
+         for (var i=0;i<arr.length;i++) {
+            var flag=true;
+            for (var j=0;j<ree.length;j++) {
+                if ( arr[i]===ree[j] ) {
+                    flag=false;
+                }
+            }
+            if (flag===true) {
+                ree[ree.length]=arr[i];
+            }
+        }
+        console.log(ree);
+        for (var k=0;k<ree.length;k++) {
+            arrChong.length=k+1;
+            arrChong[k]=0;
+            for (var l=0;l<arr.length;l++) {
+                if (ree[k]===arr[l]) {
+                    arrChong[k]++;
+                }
+            }
+            arrChong[k]=ree[k]+'*'+arrChong[k];
+        }
+        console.log(arrChong);
+        var temp;
+        for (i=0;i<ree.length;i++) {
+            for (j=0;j<ree.length;j++) {
+                if (ree[j]>ree[j+1]) {
+                    temp = ree[j];
+                    ree[j] = ree[j+1];
+                    ree[j+1] = temp;
+                }
+            }
+        }
+        console.log(ree)
+    </script>
+</body>
+</html>

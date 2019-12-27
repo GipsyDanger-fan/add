@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    var str = '8587263747153203552943982';
+    var obj = {};
+    var num = 0;
+    var arr = [];
+
+
+    //要求：找到出现次数最多的字符和次数
+    //把每个字符存到对象中
+    for (var i = 0; i < str.length; i++) {
+      if (obj[str.charAt(i)]) {
+        obj[str.charAt(i)]++;
+      } else {
+        obj[str.charAt(i)] = 1;
+      }
+    }
+
+    //遍历对象，找到最多的次数值
+    for (key in obj) {
+      if (num < obj[key]) {
+        num = obj[key];
+      }
+    }
+
+    //因为最大次数的字符有多个，所以再遍历找到所有的字符
+    for (key in obj) {
+      if (obj[key] == num) {
+        console.log('出现次数最多的字符：' + key + '，出现的次数：' + obj[key]);
+      }
+    }
+
+    //----------------------------------------------------------------------------------
+
+    //要求：去重
+    //单独把str去重
+    for (var i = 0; i < str.length; i++) {
+      if (arr.indexOf(str.charAt(i)) == -1) {
+        arr.push(str.charAt(i));
+      }
+    }
+    console.log('去重后的字符串：' + arr.join(''));
+
+    //----------------------------------------------------------------------------------
+
+    //要求：排序
+    //去重后排序
+    for (var i = 0; i < arr.length - 1; i++) {
+      for (var j = 0; j < arr.length - 1 - i; j++) {
+        if (arr[j] > arr[j + 1]) {
+          var temp;
+          temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    console.log('去重后排序：' + arr.join(''));
+
+    //----------------------------------------------------------------------------------
+
+    //要求找某个字符出现的左右位置
+    //比如说找到所有 '2' 出现的位置
+    var i = str.indexOf('2');
+    while (i !== -1) {
+      console.log('2出现的位置：' + i);
+      i = str.indexOf('2', i + 1);
+    }
+  </script>
+</body>
+
+</html>

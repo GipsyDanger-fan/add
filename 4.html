@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            top: 2px;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+//         需求：结合mousedown、mousemove、mouseup事件让div可以被拖动起来
+// 注意：所谓的拖动指的是，在div上按下鼠标左键不松开，然后移动鼠标，div会随着鼠标移动，一旦松开鼠标，div就不再跟随鼠标移动了
+        var div = document.querySelector('div');
+        var flag = false;
+        div.onmousedown = function () {
+            flag = true;
+        }
+        document.onmousemove = function (e) {
+            if (flag) {
+                var x = e.pageX
+                var y = e.pageY
+                // console.log(x)
+                div.style.top = y-div.offsetHeight/2+'px'
+                div.style.left = x-div.offsetWidth/2+'px'
+            }
+        }
+        document.onmouseup = function () {
+            flag = false; 
+        }
+    </script>
+</body>
+</html>

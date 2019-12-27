@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="text_box">
+        <input type="text" class="_name">
+        <input type="text" class="sex">
+        <input type="text" class="age">
+        <button>提交</button>
+    </div>
+    <table border="1" width="540">
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+            </tbody>
+        <tbody></tbody>
+    </table>
+    <script>
+        //         发布留言并存储到本地
+        // 要求1：点击提交按钮，让用户输入的内容分别加入到表格对应的列表中
+        // 要求2：点击每一行的删除按钮，能删除当前行
+        // 要求3：刷新页面时能保留当前的页面效果（数据状态不会消失）
+        // 要求4：代码规范
+        var _name = document.querySelector('._name');
+        var sex = document.querySelector('.sex');
+        var age = document.querySelector('.age');
+        var btn = document.querySelector('button');
+        var tbd = document.querySelector('tbody');
+        var arr = JSON.parse(localStorage.getItem('xinxi')) || [];
+        for (var i = 0; i < arr.length; i++) {
+            var tr =
+                '<tr>\
+                <td>'+ arr[i].name + '</td>\
+                <td>'+ arr[i].sex + '</td>\
+                <td>'+ arr[i].age + '</td>\
+                <td><a class="shanchu" data-index="'+arr[i].id+'">删除</a></td>\
+            </tr>'
+            tbd.insertAdjacentHTML('beforeend', tr);
+        }
+        var num = 0
+        btn.onclick = function () {
+            var str1 = _name.value;
+            var str2 = sex.value;
+            var str3 = age.value;
+            if (str1.trim().length > 0 && str2.trim().length > 0 && str3.trim().length > 0) {
+                var obg = {}
+                obg.name = str1;
+                obg.sex = str2;
+                obg.age = str3;
+                obg.id = num;
+                arr.push(obg);
+                localStorage.setItem('xinxi', JSON.stringify(arr))
+                var tr =
+                    '<tr>\
+                    <td>'+ str1 + '</td>\
+                    <td>'+ str2 + '</td>\
+                    <td>'+ str3 + '</td>\
+                    <td><a class="shanchu" data-index="'+obg.id+'">删除</a></td>\
+                </tr>'
+                tbd.insertAdjacentHTML('beforeend', tr);
+                _name.value = '';
+                sex.value = '';
+                age.value = '';
+                num++
+            }
+        }
+        tbd.onclick = function (e) {
+            if (e.target.nodeName = 'A') {
+                // console.log(e.target.parentNode.parentNode)
+                tbd.removeChild(e.target.parentNode.parentNode)
+                for (var i=0;i<arr.length;i++) {
+                    if (arr[i].id = e.target.dataset.index) {
+                        arr.splice(i, 1);
+                        localStorage.setItem('xinxi', JSON.stringify(arr))
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

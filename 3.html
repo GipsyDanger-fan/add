@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        .pop_main {
+            display: none;
+        }
+
+        .pop_con {
+            width: 500px;
+            height: 300px;
+            background: #fff;
+            border-radius: 4px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -150px;
+            border: 1px solid #f0f0f0;
+            z-index: 9999;
+        }
+
+        .pop_title {
+            width: 490px;
+            height: 40px;
+            background: #157bef;
+            margin: 5px auto 0;
+            border-radius: 6px;
+        }
+
+        .pop_title h3 {
+            float: left;
+            margin: 0px;
+            margin-left: 10px;
+            line-height: 40px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        .pop_title a {
+            float: right;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            margin: 10px 10px 0 0;
+            text-decoration: none;
+            line-height: 20px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 4px;
+        }
+
+        .pop_detail {
+            height: 200px;
+            border-bottom: 1px solid #f0f0f0;
+            /* 解决margin-top塌陷 */
+            overflow: hidden;
+        }
+
+        .pop_footer {
+            height: 54px;
+            line-height: 54px;
+            text-align: center;
+            color: #666;
+        }
+
+        .pop_footer span {
+            color: red;
+            padding: 0 5px;
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            position: fixed;
+            left: 0;
+            top: 0;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            z-index: 9990;
+        }
+
+        .pop_text {
+            margin: 74px 0 0 100px;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .pop_footer {
+            height: 54px;
+        }
+
+        .pop_footer .confirm,
+        .pop_footer .cancel {
+            float: right;
+            width: 100px;
+            height: 36px;
+            background: #157bef;
+            border: 0px;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            margin: 9px 10px 0 0;
+        }
+
+        .pop_footer .cancel {
+            background: #ddd;
+            color: #666;
+            margin-right: 20px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="弹出弹框" id="btn">
+        <div class="pop_main" id="pop">
+            <div data-num="0" class="pop_con">
+                <div class="pop_title">
+                    <h3>系统提示</h3>
+                </div>
+                <div class="pop_detail">
+                    <p class="pop_text">亲！请关注近期的优惠活动！</p>
+                </div>
+                <div class="pop_footer">
+                </div>
+            </div>
+            <div class="mask"></div>
+        </div>
+    </div>
+    <script>
+        // 如果我想在弹出框弹出的时候点击弹出框pop中的半透明区域，则隐藏pop弹出框，我加入了以下代码：
+        // document.documentElement.onclick = function (e) {
+        //    pop.style.display = 'none';
+        // }
+        // 此时你会发现，点击按钮 弹出弹框 的功能居然就失效了。
+        // 需求：
+        // 简单描述为什么加入最后那部分js代码之后，按钮的点击弹框效果就失效了。
+        // 原因， document.documentElement包含了按钮  事件覆盖了
+
+        // 如何修改代码可以让按钮的点击弹框的效果生效。
+        // 修改事件源
+        // 实现最终效果：点击弹出框pop中的半透明区域，则隐藏pop弹出框，如果点击的是弹出框pop中的非半透明区域，不要隐藏pop弹出框。
+        var btn = document.getElementById('btn');
+        var pop = document.getElementById('pop');
+        var pop_ = document.querySelector('.pop_con')
+        var mask = document.querySelector('.mask')
+        btn.onclick = function (e) {
+            pop.style.display = 'block';
+        }
+
+        // mask.onclick = function () {
+        //     pop.style.display = 'none';
+        // }
+        document.documentElement.onclick = function (e) {
+            if (e.target.className == 'mask') {
+                pop.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
